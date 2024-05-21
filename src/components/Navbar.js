@@ -87,6 +87,13 @@ const Navbar = () => {
               >
                 Payment Listing
               </Link>
+             
+              <Link
+                className="nav-link active"
+                aria-current="page"
+                to="/school"
+              >
+                School Form              </Link>
             </ul>
           </div>
         </div>

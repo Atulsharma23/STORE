@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
+
 const Youtube = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -11,47 +12,43 @@ const Youtube = () => {
   const [selectUser, setSelectUser] = useState(0);
   const [editMode, seteditMode] = useState(false);
   const [errors, setErrors] = useState({});
-  const UpdateUser = async () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(5);
 
-    const validationErrors = {};
-    if (!name.trim()) {
-      validationErrors.name = "Name is required"
+  const getUsers = async () => {
+    try {
+      const response = await axios.get("http://localhost:3001/youtubeform");
+      setData(response.data);
+    } catch (error) {
+      console.error("Error in getting data", error);
     }
-    if (!email.trim()) {
-      validationErrors.email = "Enter is Required"
-    }
-    else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
-      validationErrors.email = "Enter a Valid Email";
-    }
-    if (!channel.trim()) {
-      validationErrors.channel = "Enter channel name";
-    }
-    if (!comment.trim()) {
-      validationErrors.comment = "Please add comment"
-    }
-    setErrors(validationErrors);
-    if (Object.keys(validationErrors).length === 0) {
-      if (selectUser) {
-        let data = {
-          name: name,
-          email: email,
-          channel: channel,
-          comment: comment,
-        };
+  };
 
-        const response = await axios.put(
-          `http://localhost:3001/youtubeform/${selectUser.id}`,
-          data
-        );
-        console.log(response.data, "this is update function response");
-      }
-      setName("");
-      setChannel("");
-      setComment("");
-      setEmail("");
-      getUsers();
-    };
-  }
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const handleNextPage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
+  const handlePrevPage = () => {
+    setCurrentPage((prevPage) => prevPage - 1);
+  };
+
+  const totalPages = Math.ceil(data.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+
+  const deleteUser = async (id) => {
+    try {
+      await axios.delete(`http://localhost:3001/youtubeform/${id}`);
+    } catch (error) {
+      console.error("This is error", error);
+    }
+    getUsers();
+  };
 
   const Edit = (id) => {
     const selectUser = data.find((user) => user.id === id);
@@ -65,13 +62,47 @@ const Youtube = () => {
     }
   };
 
-  const deleteUser = async (id) => {
-    try {
-      await axios.delete(`http://localhost:3001/youtubeform/${id}`);
-    } catch (error) {
-      console.error("This is error", error);
+  const UpdateUser = async () => {
+    const validationErrors = {};
+    if (!name.trim()) {
+      validationErrors.name = "Name is required";
     }
-    getUsers();
+    if (!email.trim()) {
+      validationErrors.email = "Enter is Required";
+    } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
+      validationErrors.email = "Enter a Valid Email";
+    }
+    if (!channel.trim()) {
+      validationErrors.channel = "Enter channel name";
+    }
+    if (!comment.trim()) {
+      validationErrors.comment = "Please add comment";
+    }
+    setErrors(validationErrors);
+    if (Object.keys(validationErrors).length === 0) {
+      if (selectUser) {
+        let data = {
+          name: name,
+          email: email,
+          channel: channel,
+          comment: comment,
+        };
+
+        try {
+          const response = await axios.put(
+            `http://localhost:3001/youtubeform/${selectUser.id}`,
+            data
+          );
+        } catch (error) {
+          console.error("Error in updating data", error);
+        }
+      }
+      setName("");
+      setChannel("");
+      setComment("");
+      setEmail("");
+      getUsers();
+    }
   };
 
   const SaveUser = async (e) => {
@@ -100,7 +131,6 @@ const Youtube = () => {
           "http://localhost:3001/youtubeform",
           data
         );
-        console.log(response.data);
       } catch (error) {
         console.error("Error in posting data", error);
       }
@@ -112,21 +142,51 @@ const Youtube = () => {
     }
   };
 
-  const getUsers = async () => {
-    try {
-      const response = await axios.get("http://localhost:3001/youtubeform");
-      setData(response.data);
-      console.log(response.data);
-    } catch (error) {
-      console.error("Error in getting data", error);
-    }
-  };
-
-  useEffect(() => {
-    getUsers();
-  }, []);
   return (
     <div className="container">
+      <table className="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Channel</th>
+            <th scope="col">Notes</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentItems.map((user, index) => (
+            <tr key={index}>
+              <th scope="row">{indexOfFirstItem + index + 1}</th>
+              <td>{user.name}</td>
+              <td>{user.email}</td>
+              <td>{user.channel}</td>
+              <td>{user.comment}</td>
+              <td>
+                <DeleteIcon onClick={() => deleteUser(user.id)} />
+                &nbsp;
+                <EditIcon onClick={() => Edit(user.id)} seteditMode={true} />
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <nav aria-label="Page navigation example">
+        <ul className="pagination">
+          <li className={`page-item ${currentPage === 1 && 'disabled'}`}>
+            <button className="page-link" onClick={handlePrevPage}>Previous</button>
+          </li>
+          {[...Array(totalPages)].map((_, index) => (
+            <li key={index} className={`page-item ${currentPage === index + 1 && 'active'}`}>
+              <button className="page-link" onClick={() => setCurrentPage(index + 1)}>{index + 1}</button>
+            </li>
+          ))}
+          <li className={`page-item ${currentPage === totalPages && 'disabled'}`}>
+            <button className="page-link" onClick={handleNextPage}>Next</button>
+          </li>
+        </ul>
+      </nav>
       <div className="form-container">
         <h1 className="heading">This is Youtube Form</h1>
         <div className="Youtube-input">
@@ -185,35 +245,8 @@ const Youtube = () => {
         </button>
       </div>
 
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Channel</th>
-            <th scope="col">Notes</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.map((user) => (
-            <tr key={user.id}>
-              <th scope="row">{user.id}</th>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.channel}</td>
-              <td>{user.comment}</td>
-              <td>
-                <DeleteIcon onClick={() => deleteUser(user.id)} />
-                &nbsp;
-                <EditIcon onClick={() => Edit(user.id)} seteditMode={true} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 };
+
 export default Youtube;

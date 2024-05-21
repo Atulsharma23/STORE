@@ -114,21 +114,213 @@ span {
   border: 2px solid black;
   border-radius: 3px;
 }
-.heading{
+
+.heading {
   margin-left: 6rem;
   color: rgb(11, 11, 10);
 }
-.Youtube-input{
+
+.Youtube-input {
   margin-top: 10px;
   margin-bottom: 10px;
   margin-left: 3px;
   margin-right: 3px;
-  display:grid;
+  display: grid;
   border: 1px solid white;
-  
+
 }
-.btn-container{
+
+.btn-container {
   display: flex;
   justify-content: center;
   margin: 100px;
 }
+
+.school-form {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #e8d3e1;
+  margin-top: 20px;
+  border-radius: 10px;
+  height: 85vh;
+}
+
+.heading {
+  margin-left: 38%;
+  margin-top: 12px;
+  color: #091416;
+}
+
+
+.input-fields .in {
+  margin-bottom: 30px;
+  width: 70%;
+  border: 2px solid rgb(50, 138, 101);
+  border-radius: 7px;
+  cursor: pointer;
+
+
+}
+
+.products {
+  display: flex;
+  justify-content: center;
+}
+
+.products img {
+  max-height: 14rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+
+}
+
+.product-img .long {
+  margin-top: 2rem;
+  margin-left: 5rem;
+}
+
+.er {
+  margin-top: -20px;
+  margin-right: 53%;
+}
+
+.table .btr {
+  border-radius: 4px;
+}
+
+.input-fields .btr {
+  border-radius: 4px;
+
+}
+
+.container {
+  width: 100%;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.flex-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* Center items horizontally */
+  gap: 10px;
+}
+
+.image {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+.image img p{
+display: flex;
+justify-content: center;
+}
+@me.add-restaurant {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+}
+
+.input-fields {
+  margin-bottom: 16px;
+}
+
+.input-fields input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.input-fields button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+/* Default Styles */
+.add-restaurant {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  width: 100%;
+  max-width: 400px; /* Adjust as necessary */
+  margin: auto;
+}
+
+.input-fields {
+  margin-bottom: 16px;
+}
+
+.input-fields input {
+  width: 100%;
+  padding: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.input-fields button {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+}
+
+/* Media Queries for Mobile Devices */
+@media (max-width: 768px) {
+  .add-restaurant {
+    padding: 12px;
+    max-width: 90%; /* Make it slightly smaller to fit better */
+  }
+
+  .input-fields input {
+    font-size: 14px;
+    padding: 6px;
+  }
+
+  .input-fields button {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .input-fields span {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .add-restaurant {
+    padding: 8px;
+    max-width: 95%; /* Further reduce width for smaller screens */
+  }
+
+  .input-fields input {
+    font-size: 12px;
+    padding: 4px;
+  }
+
+  .input-fields button {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .input-fields span {
+    font-size: 10px;
+  }
+}
+
+/* Centering the form */
+

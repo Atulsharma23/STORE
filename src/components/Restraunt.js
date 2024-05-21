@@ -5,10 +5,16 @@ const Restraunt = () => {
   const [name, setName] = useState("");
   const [address, setAddress] = useState("");
   const [rating, setRating] = useState("");
+
   const [email, setEmail] = useState("");
   const [selectUser, setSelectUser] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
   const [errors, setErrors] = useState({});
+  const [search, setSearch] = useState("");
+
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const itemsPerPage = 5;
 
   const Edit = (id) => {
     const selectedUser = restau.find((restaurant) => restaurant.id === id);
@@ -31,48 +37,47 @@ const Restraunt = () => {
       validationErrors.address = "Address is Required";
     }
     if (!rating.trim()) {
-      validationErrors.rating = "Rating is  Required";
+      validationErrors.rating = "Rating is Required";
     }
     if (!email.trim()) {
       validationErrors.email = "Email is required";
     } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
-      validationErrors.email=("Enter Valid email");
+      validationErrors.email = "Enter a valid email";
     }
     setErrors(validationErrors);
 
-    if (Object.keys(validationErrors).length === 0){
-    if (selectUser) {
-      let data = { name, address, rating, email };
+    if (Object.keys(validationErrors).length === 0) {
+      if (selectUser) {
+        let data = { name, address, rating, email };
 
-      fetch(`http://localhost:3001/restaurant/${selectUser.id}`, {
-        method: "PUT",
-        headers: {
-          Accept: "application/json",
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(data),
-      })
-        .then((result) => result.json())
-        .then((resp) => {
-          console.log(resp);
-          setName("");
-          setAddress("");
-          setEmail("");
-          setRating("");
-          updateRestraunt();
-          setIsEditMode(false);
-          setSelectUser(0);
-        });
-    } else {
-      setName("");
-      setAddress("");
-      setEmail("");
-      setRating("");
-      updateRestraunt();
-      setIsEditMode(false);
-      setSelectUser(0);
+        fetch(`http://localhost:3001/restaurant/${selectUser.id}`, {
+          method: "PUT",
+          headers: {
+            Accept: "application/json",
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((result) => result.json())
+          .then((resp) => {
+            setName("");
+            setAddress("");
+            setEmail("");
+            setRating("");
+            updateRestraunt();
+            setIsEditMode(false);
+            setSelectUser(0);
+          });
+      } else {
+        setName("");
+        setAddress("");
+        setEmail("");
+        setRating("");
+        updateRestraunt();
+        setIsEditMode(false);
+        setSelectUser(0);
+      }
     }
-  }
   };
 
   const addrestaurant = () => {
@@ -84,12 +89,12 @@ const Restraunt = () => {
       validationErrors.address = "Address is Required";
     }
     if (!rating.trim()) {
-      validationErrors.rating = "Rating is  Required";
+      validationErrors.rating = "Rating is Required";
     }
     if (!email.trim()) {
-      validationErrors.email="Email is required";
+      validationErrors.email = "Email is required";
     } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
-      validationErrors.email("Enter Valid email");
+      validationErrors.email = "Enter a valid email";
     }
     setErrors(validationErrors);
 
@@ -104,7 +109,6 @@ const Restraunt = () => {
         body: JSON.stringify(data),
       }).then((result) => {
         result.json().then((resp) => {
-          console.log(resp);
           setName("");
           setAddress("");
           setRating("");
@@ -120,7 +124,6 @@ const Restraunt = () => {
       method: "DELETE",
     }).then((result) => {
       result.json().then((resp) => {
-        console.log(resp);
         updateRestraunt();
       });
     });
@@ -130,7 +133,6 @@ const Restraunt = () => {
     const url = "http://localhost:3001/restaurant";
     const data = await fetch(url);
     const parsedData = await data.json();
-    console.log(parsedData);
     setRestau(parsedData);
   };
 
@@ -138,10 +140,34 @@ const Restraunt = () => {
     updateRestraunt();
   }, []);
 
+  // Pagination logic
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = restau
+    .filter((data) => {
+      return search.toLowerCase() === ""
+        ? data
+        : data.name.toLowerCase().includes(search.toLowerCase());
+    })
+    .slice(indexOfFirstItem, indexOfLastItem);
+
+  const pageNumbers = [];
+  for (let i = 1; i <= Math.ceil(restau.length / itemsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div className="container">
       <div className="Restraunt-List">
         <h2>Restraunt List</h2>
+        <h6>Search Restraunt</h6>
+        <input
+          type="search"
+          id="site-search"
+          name="q"
+          placeholder="Seach by Restraunt Name"
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <table className="table">
           <thead>
             <tr>
@@ -155,7 +181,7 @@ const Restraunt = () => {
             </tr>
           </thead>
           <tbody>
-            {restau.map((restaurant) => (
+            {currentItems.map((restaurant) => (
               <tr key={restaurant.id}>
                 <th scope="row">{restaurant.id}</th>
                 <td>{restaurant.name}</td>
@@ -182,7 +208,33 @@ const Restraunt = () => {
             ))}
           </tbody>
         </table>
-
+        <nav aria-label="Page navigation example">
+          <ul className="pagination">
+            <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+              <button className="page-link" onClick={() => setCurrentPage(currentPage - 1)}>
+                Previous
+              </button>
+            </li>
+            {pageNumbers.map((number) => (
+              <li
+                key={number}
+                className={`page-item ${currentPage === number ? "active" : ""}`}
+              >
+                <button className="page-link" onClick={() => setCurrentPage(number)}>
+                  {number}
+                </button>
+              </li>
+            ))}
+            <li
+              className={`page-item ${currentPage === pageNumbers.length ? "disabled" : ""
+                }`}
+            >
+              <button className="page-link" onClick={() => setCurrentPage(currentPage + 1)}>
+                Next
+              </button>
+            </li>
+          </ul>
+        </nav>
         <div className="add-restaurant">
           <div className="input-fields">
             <input
@@ -225,9 +277,9 @@ const Restraunt = () => {
           <div className="input-fields">
             <button
               className="btn-primary"
-              onClick={isEditMode === true ? updateRes : addrestaurant}
+              onClick={isEditMode ? updateRes : addrestaurant}
             >
-              {isEditMode ? "Update Restaurant" : "Add Restaurant"}{" "}
+              {isEditMode ? "Update Restaurant" : "Add Restaurant"}
             </button>
           </div>
         </div>

@@ -19,7 +19,6 @@ const Events = () => {
       venue,
       photo
     };
-    console.log(data, "This is data");
     fetch("http://localhost:3001/events", {
       method: "POST",
       headers: {
@@ -30,7 +29,6 @@ const Events = () => {
     })
       .then((result) => result.json())
       .then((resp) => {
-        console.log(resp);
         SetAddress("");
         SetEventDescription("");
         SetEventName("");
@@ -143,6 +141,7 @@ const Events = () => {
             class="form-control"
             id="inputGroupFile01"
             value={photo}
+            
             onChange={(e) => {
               SetPhoto(e.target.value);
             }}

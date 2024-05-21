@@ -4,7 +4,6 @@ import Modal from "react-bootstrap/Modal";
 
 function Modalevent(props) {
   const {data}=props;
-  console.log(data,"this is the data that i pass from event page")
   const values = [true];
   const [fullscreen, setFullscreen] = useState(true);
   const [show, setShow] = useState(false);

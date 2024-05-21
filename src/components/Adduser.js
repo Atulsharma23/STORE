@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 const AddUser = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -7,7 +8,22 @@ const AddUser = () => {
   const [selectUser, SetSelectUser] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
   const [errors, setErrors] = useState({});
-  function Edit(id) {
+  const [search, setSearch] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 5;
+
+  useEffect(() => {
+    updateUsers();
+  }, []);
+
+  const updateUsers = async () => {
+    const url = "http://localhost:3001/users";
+    const data = await fetch(url);
+    const parsedData = await data.json();
+    setUsers(parsedData);
+  };
+
+  const Edit = (id) => {
     const selectedUser = users.find((user) => user.id === id);
     if (selectedUser) {
       SetSelectUser(selectedUser);
@@ -16,9 +32,9 @@ const AddUser = () => {
       setPassword(selectedUser.password);
       setIsEditMode(true);
     }
-  }
-  function handleUpdate() {
+  };
 
+  const handleUpdate = () => {
     const validationErrors = {};
     if (!name.trim()) {
       validationErrors.name = "Name is Required";
@@ -28,25 +44,15 @@ const AddUser = () => {
     } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
       validationErrors.email = "Email is not Valid";
     }
-
     if (!password.trim()) {
       validationErrors.password = "Password is required";
     } else if (password.length < 6) {
-      validationErrors.password =
-        "Password length should be at least 6 Characters";
+      validationErrors.password = "Password length should be at least 6 Characters";
     }
-
     setErrors(validationErrors);
-
     if (Object.keys(validationErrors).length === 0) {
-
-
-
-
-
       if (selectUser) {
         const updateUserUrl = `http://localhost:3001/users/${selectUser.id}`;
-
         fetch(updateUserUrl, {
           method: "PUT",
           headers: {
@@ -57,13 +63,11 @@ const AddUser = () => {
         })
           .then((result) => result.json())
           .then((resp) => {
-            console.log(resp);
-            // Additional logic after the update if needed
             SetSelectUser(null); // Reset selected user after update
             setName("");
             setEmail("");
             setPassword("");
-            updateUser();
+            updateUsers();
             setIsEditMode(false);
             SetSelectUser(0); // Assuming you want to update the user list after the update
           })
@@ -74,32 +78,24 @@ const AddUser = () => {
         setName("");
         setEmail("");
         setPassword("");
-        updateUser();
+        updateUsers();
         setIsEditMode(false);
         SetSelectUser(0);
       }
     }
-  }
+  };
 
-  function deleteUser(id) {
+  const deleteUser = (id) => {
     fetch(`http://localhost:3001/users/${id}`, {
       method: "DELETE",
     }).then((result) => {
       result.json().then((resp) => {
-        console.log(resp);
-        updateUser();
+        updateUsers();
       });
     });
-  }
-
-  const updateUser = async () => {
-    const url = "http://localhost:3001/users";
-    const data = await fetch(url);
-    const parsedData = await data.json();
-    setUsers(parsedData);
   };
 
-  function save() {
+  const save = () => {
     const validationErrors = {};
     if (!name.trim()) {
       validationErrors.name = "Name is Required";
@@ -109,16 +105,12 @@ const AddUser = () => {
     } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
       validationErrors.email = "Email is not Valid";
     }
-
     if (!password.trim()) {
       validationErrors.password = "Password is required";
     } else if (password.length < 6) {
-      validationErrors.password =
-        "Password length should be at least 6 Characters";
+      validationErrors.password = "Password length should be at least 6 Characters";
     }
-
     setErrors(validationErrors);
-
     if (Object.keys(validationErrors).length === 0) {
       let data = { name, email, password };
       fetch("http://localhost:3001/users", {
@@ -131,32 +123,42 @@ const AddUser = () => {
       })
         .then((result) => result.json())
         .then((resp) => {
-          console.log("User saved:", resp);
           setName("");
           setEmail("");
           setPassword("");
-          updateUser();
+          updateUsers();
         });
-    } else {
-      alert("Please add valid data");
     }
-  }
-
-  const updateusers = async () => {
-    const url = "http://localhost:3001/users";
-    const data = await fetch(url);
-    const parsedData = await data.json();
-    console.log(parsedData);
   };
-  useEffect(() => {
-    updateusers();
-  }, []);
-  useEffect(() => {
-    updateUser();
-  }, []);
+
+  const handleSearchChange = (e) => {
+    setSearch(e.target.value);
+    setCurrentPage(1); // Reset to the first page on new search
+  };
+
+  const filteredUsers = users.filter((data) =>
+    search.toLowerCase() === ""
+      ? data
+      : data.name.toLowerCase().includes(search.toLowerCase())
+  );
+
+  const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
+  const currentUsers = filteredUsers.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   return (
     <div className="container">
       <h2>User List</h2>
+      <h6>Search User</h6>
+      <input
+        type="search"
+        id="site-search"
+        placeholder="Search by Username"
+        name="q"
+        onChange={handleSearchChange}
+      />
       <table className="table">
         <thead>
           <tr>
@@ -168,7 +170,7 @@ const AddUser = () => {
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
+          {currentUsers.map((user) => (
             <tr key={user.id}>
               <th scope="row">{user.id}</th>
               <td>{user.name}</td>
@@ -178,10 +180,7 @@ const AddUser = () => {
                 <button className="btn-primary" onClick={() => Edit(user.id)}>
                   Edit
                 </button>
-                <button
-                  className="btn-primary"
-                  onClick={() => deleteUser(user.id)}
-                >
+                <button className="btn-primary" onClick={() => deleteUser(user.id)}>
                   Delete
                 </button>
               </td>
@@ -189,6 +188,27 @@ const AddUser = () => {
           ))}
         </tbody>
       </table>
+      <nav aria-label="Page navigation example">
+        <ul className="pagination">
+          <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+            <button className="page-link" onClick={() => setCurrentPage(currentPage - 1)} disabled={currentPage === 1}>
+              Previous
+            </button>
+          </li>
+          {[...Array(totalPages)].map((_, index) => (
+            <li key={index} className={`page-item ${currentPage === index + 1 ? "active" : ""}`}>
+              <button className="page-link" onClick={() => setCurrentPage(index + 1)}>
+                {index + 1}
+              </button>
+            </li>
+          ))}
+          <li className={`page-item ${currentPage === totalPages ? "disabled" : ""}`}>
+            <button className="page-link" onClick={() => setCurrentPage(currentPage + 1)} disabled={currentPage === totalPages}>
+              Next
+            </button>
+          </li>
+        </ul>
+      </nav>
       <div className="Update-User">
         <div className="input-fields">
           <h2>Add User</h2>
@@ -202,7 +222,6 @@ const AddUser = () => {
           />
           {errors.name && <span>{errors.name}</span>}
         </div>
-
         <div className="input-fields">
           <input
             type="text"
@@ -214,7 +233,6 @@ const AddUser = () => {
           />
           {errors.email && <span>{errors.email}</span>}
         </div>
-
         <div className="input-fields">
           <input
             type="text"
