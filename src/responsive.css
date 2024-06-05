@@ -1,0 +1,155 @@
+@media only screen and (min-width:320px) and (max-width:767px) {
+    .restaurant {
+        background-color: rgb(206, 199, 199);
+        overflow: hidden;
+        overflow: scroll;
+    }
+
+    .addnew {
+        background-color: rgb(206, 199, 199);
+        overflow: hidden;
+        overflow: scroll;
+    }
+
+    .product {
+        background-color: rgb(206, 199, 199);
+        overflow: hidden;
+        overflow: scroll;
+    }
+
+    .youtube {
+        background-color: rgb(206, 199, 199);
+        overflow: hidden;
+        overflow: scroll;
+
+    }
+
+    .table-wrapper {
+        overflow-x: auto;
+    }
+
+    .table.restaurant {
+        width: 1000px;
+        /* Adjust the width based on your table's content */
+    }
+    .add-restaurant {
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+    
+      .add-restaurant .input-fields {
+        margin-bottom: 15px;
+      }
+    
+      .add-restaurant .input-fields input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+    
+      .add-restaurant .input-fields input[type="text"]:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    
+      .add-restaurant .input-fields span {
+        display: block;
+        color: #ff0000;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    
+      .add-restaurant .btn-primary {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    
+      .add-restaurant .btn-primary:hover {
+        background-color: #0056b3;
+      }
+      .form-container {
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+      }
+    
+      .form-container .heading {
+        font-size: 24px;
+        color: #333333;
+        margin-bottom: 20px;
+      }
+    
+      .form-container .Youtube-input {
+        margin-bottom: 15px;
+      }
+    
+      .form-container .Youtube-input input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+      }
+    
+      .form-container .Youtube-input input[type="text"]:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    
+      .form-container span {
+        display: block;
+        color: #ff0000;
+        font-size: 14px;
+        margin-top: 5px;
+      }
+    
+      .form-container .form-floating {
+        margin-bottom: 15px;
+      }
+    
+      .form-container .form-floating textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 16px;
+        resize: none;
+      }
+    
+      .form-container .form-floating textarea:focus {
+        border-color: #007bff;
+        outline: none;
+      }
+    
+      .form-container .form-floating label {
+        font-size: 14px;
+        color: #666666;
+      }
+    
+      .form-container .btn-primary {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    
+      .form-container .btn-primary:hover {
+        background-color: #0056b3;
+      }
+}

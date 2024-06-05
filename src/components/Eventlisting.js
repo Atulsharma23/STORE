@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import Modalevent from "./Modalevent";
 
 const Eventlisting = () => {
@@ -6,9 +6,14 @@ const Eventlisting = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(6); // Adjust the number of items per page as needed
 
-  const updateEvents = async () => {
+  const parsePhotoUrl = (url) => {
+    // Add your logic to parse or modify the photo URL here
+    return url;
+  };
+
+  const updateEvents = useCallback(async () => {
     try {
-      let url = "http://localhost:3001/events";
+      let url = "http://localhost:3000/events";
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error("Failed to fetch events");
@@ -29,16 +34,11 @@ const Eventlisting = () => {
     } catch (error) {
       console.error("Error fetching events:", error.message);
     }
-  };
+  }, []); // Add an empty dependency array to memoize the function
 
   useEffect(() => {
     updateEvents();
-  }, []);
-
-  const parsePhotoUrl = (url) => {
-    // Add your logic to parse or modify the photo URL here
-    return url;
-  };
+  }, [updateEvents]); // Include updateEvents in the dependency array
 
   const totalPages = Math.ceil(events.length / itemsPerPage);
   const indexOfLastItem = currentPage * itemsPerPage;

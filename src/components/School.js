@@ -54,7 +54,7 @@ const School = () => {
       };
 
       const response = await axios.put(
-        `http://localhost:3001/school/${selectUser.id}`,
+        `http://localhost:3000/school/${selectUser.id}`,
         data
       );
       setStudent("");
@@ -89,7 +89,7 @@ const School = () => {
       e.preventDefault();
       let data = { student, school, address, phone, zipcode };
       try {
-        const response = await axios.post("http://localhost:3001/school", data);
+        const response = await axios.post("http://localhost:3000/school", data);
         getSchool();
       } catch (error) {
       }
@@ -103,7 +103,7 @@ const School = () => {
 
   const Delete = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/school/${id}`);
+      const response = await axios.delete(`http://localhost:3000/school/${id}`);
       console.log(response);
     } catch (error) {
       console.log("There is error in deleting ", error);
@@ -113,7 +113,7 @@ const School = () => {
 
   const getSchool = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/school");
+      const response = await axios.get("http://localhost:3000/school");
       setData(response.data);
     } catch (error) {
     }
@@ -138,48 +138,53 @@ const School = () => {
 
   return (
     <div className="container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Sr.No.</th>
-            <th scope="col">Student Name</th>
-            <th scope="col">School Name</th>
-            <th scope="col">School Address</th>
-            <th scope="col">Phone Number</th>
-            <th scope="col">Zipcode</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentData.map((item) => (
-            <tr className="table-warning" key={item.id}>
-              <th scope="row">{item.id}</th>
-              <td className="table-primary">{item.student}</td>
-              <td className="table-secondary">{item.school}</td>
-              <td className="table-success">{item.address}</td>
-              <td className="table-danger">{item.phone}</td>
-              <td className="table-warning">{item.zipcode}</td>
-              <td>
-                {" "}
-                <button
-                  className="table-warning btn-success btr"
-                  onClick={() => Edit(item.id)}
-                >
-                  Edit
-                </button>{" "}
-              </td>
-              <td>
-                {" "}
-                <button
-                  className="table-warning btn-danger btr"
-                  onClick={() => Delete(item.id)}
-                >
-                  Delete
-                </button>{" "}
-              </td>
+      <div className="table-wrapper">
+
+        <table className="table ">
+          <thead className="table-head">
+            <tr>
+              <th scope="col">Sr.No.</th>
+              <th scope="col">Student Name</th>
+              <th scope="col">School Name</th>
+              <th scope="col">School Address</th>
+              <th scope="col">Phone Number</th>
+              <th scope="col">Zipcode</th>
+              <th scope="col">Actions</th>
+
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentData.map((item) => (
+              <tr className="table-warning" key={item.id}>
+                <th scope="row">{item.id}</th>
+                <td className="table-primary">{item.student}</td>
+                <td className="table-secondary">{item.school}</td>
+                <td className="table-success">{item.address}</td>
+                <td className="table-danger">{item.phone}</td>
+                <td className="table-warning">{item.zipcode}</td>
+                <td>
+                  {" "}
+                  <button
+                    className="table-warning btn-success btr"
+                    onClick={() => Edit(item.id)}
+                  >
+                    Edit
+                  </button>{" "}
+                </td>
+                <td>
+                  {" "}
+                  <button
+                    className="table-warning btn-danger btr"
+                    onClick={() => Delete(item.id)}
+                  >
+                    Delete
+                  </button>{" "}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className={`page-item ${currentPage === 1 && 'disabled'}`}>

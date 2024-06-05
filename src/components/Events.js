@@ -19,7 +19,7 @@ const Events = () => {
       venue,
       photo
     };
-    fetch("http://localhost:3001/events", {
+    fetch("http://localhost:3000/events", {
       method: "POST",
       headers: {
         Accept: "Application/json",

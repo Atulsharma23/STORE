@@ -17,7 +17,7 @@ const Youtube = () => {
 
   const getUsers = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/youtubeform");
+      const response = await axios.get("http://localhost:3000/youtubeform");
       setData(response.data);
     } catch (error) {
       console.error("Error in getting data", error);
@@ -43,7 +43,7 @@ const Youtube = () => {
 
   const deleteUser = async (id) => {
     try {
-      await axios.delete(`http://localhost:3001/youtubeform/${id}`);
+      await axios.delete(`http://localhost:3000/youtubeform/${id}`);
     } catch (error) {
       console.error("This is error", error);
     }
@@ -90,7 +90,7 @@ const Youtube = () => {
 
         try {
           const response = await axios.put(
-            `http://localhost:3001/youtubeform/${selectUser.id}`,
+            `http://localhost:3000/youtubeform/${selectUser.id}`,
             data
           );
         } catch (error) {
@@ -128,7 +128,7 @@ const Youtube = () => {
       let data = { name, email, channel, comment };
       try {
         const response = await axios.post(
-          "http://localhost:3001/youtubeform",
+          "http://localhost:3000/productReviews",
           data
         );
       } catch (error) {
@@ -144,34 +144,37 @@ const Youtube = () => {
 
   return (
     <div className="container">
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Channel</th>
-            <th scope="col">Notes</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentItems.map((user, index) => (
-            <tr key={index}>
-              <th scope="row">{indexOfFirstItem + index + 1}</th>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.channel}</td>
-              <td>{user.comment}</td>
-              <td>
-                <DeleteIcon onClick={() => deleteUser(user.id)} />
-                &nbsp;
-                <EditIcon onClick={() => Edit(user.id)} seteditMode={true} />
-              </td>
+      <div className="table-wrapper">
+
+        <table className="table youtube">
+          <thead className="table-head">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Channel</th>
+              <th scope="col">Notes</th>
+              <th scope="col">Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentItems.map((user, index) => (
+              <tr key={index}>
+                <th scope="row">{indexOfFirstItem + index + 1}</th>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.channel}</td>
+                <td>{user.comment}</td>
+                <td>
+                  <DeleteIcon onClick={() => deleteUser(user.id)} />
+                  &nbsp;
+                  <EditIcon onClick={() => Edit(user.id)} seteditMode={true} />
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className={`page-item ${currentPage === 1 && 'disabled'}`}>

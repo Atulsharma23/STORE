@@ -50,7 +50,7 @@ const Restraunt = () => {
       if (selectUser) {
         let data = { name, address, rating, email };
 
-        fetch(`http://localhost:3001/restaurant/${selectUser.id}`, {
+        fetch(`http://localhost:3000/restaurant/${selectUser.id}`, {
           method: "PUT",
           headers: {
             Accept: "application/json",
@@ -100,7 +100,7 @@ const Restraunt = () => {
 
     if (Object.keys(validationErrors).length === 0) {
       let data = { name, address, rating, email };
-      fetch("http://localhost:3001/restaurant", {
+      fetch("http://localhost:3000/restaurant", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -120,7 +120,7 @@ const Restraunt = () => {
   };
 
   const deleteUser = (id) => {
-    fetch(`http://localhost:3001/restaurant/${id}`, {
+    fetch(`http://localhost:3000/restaurant/${id}`, {
       method: "DELETE",
     }).then((result) => {
       result.json().then((resp) => {
@@ -130,7 +130,7 @@ const Restraunt = () => {
   };
 
   const updateRestraunt = async () => {
-    const url = "http://localhost:3001/restaurant";
+    const url = "http://localhost:3000/restaurant";
     const data = await fetch(url);
     const parsedData = await data.json();
     setRestau(parsedData);
@@ -165,49 +165,53 @@ const Restraunt = () => {
           type="search"
           id="site-search"
           name="q"
-          placeholder="Seach by Restraunt Name"
+          placeholder="Search Restraunt Name"
           onChange={(e) => setSearch(e.target.value)}
         />
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">ID</th>
-              <th scope="col">RESTAURANT NAME</th>
-              <th scope="col">ADDRESS</th>
-              <th scope="col">RATING</th>
-              <th scope="col">EMAIL</th>
-              <th scope="col">DELETE</th>
-              <th scope="col">EDIT</th>
-            </tr>
-          </thead>
-          <tbody>
-            {currentItems.map((restaurant) => (
-              <tr key={restaurant.id}>
-                <th scope="row">{restaurant.id}</th>
-                <td>{restaurant.name}</td>
-                <td>{restaurant.address}</td>
-                <td>{restaurant.rating}</td>
-                <td>{restaurant.email}</td>
-                <td>
-                  <button
-                    className="btn-primary"
-                    onClick={() => deleteUser(restaurant.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-                <td>
-                  <button
-                    className="btn-primary"
-                    onClick={() => Edit(restaurant.id)}
-                  >
-                    Edit
-                  </button>
-                </td>
+        <div className="table-wrapper">
+
+          <table className="table restaurant">
+            <thead className="table-head">
+              <tr>
+                <th scope="col">ID</th>
+                <th scope="col">RESTAURANT NAME</th>
+                <th scope="col">ADDRESS</th>
+                <th scope="col">RATING</th>
+                <th scope="col">EMAIL</th>
+                <th scope="col">DELETE</th>
+                <th scope="col">EDIT</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {currentItems.map((restaurant) => (
+                <tr key={restaurant.id}>
+                  <th scope="row">{restaurant.id}</th>
+                  <td>{restaurant.name}</td>
+                  <td>{restaurant.address}</td>
+                  <td>{restaurant.rating}</td>
+                  <td>{restaurant.email}</td>
+                  <td>
+                    <button
+                      className="btn-primary"
+                      onClick={() => deleteUser(restaurant.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      className="btn-primary"
+                      onClick={() => Edit(restaurant.id)}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
         <nav aria-label="Page navigation example">
           <ul className="pagination">
             <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>

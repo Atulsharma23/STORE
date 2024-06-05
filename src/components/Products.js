@@ -42,7 +42,7 @@ const Products = () => {
           price: productPrice,
           description: description,
         };
-        fetch(`http://localhost:3001/addproduct/${selectUser.id}`, {
+        fetch(`http://localhost:3000/addproduct/${selectUser.id}`, {
           method: "PUT",
           headers: {
             Accept: "application/json",
@@ -87,7 +87,7 @@ const Products = () => {
         price: productPrice,
         description: description,
       };
-      fetch("http://localhost:3001/addproduct", {
+      fetch("http://localhost:3000/addproduct", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -106,7 +106,7 @@ const Products = () => {
   };
 
   const deleteProduct = (id) => {
-    fetch(`http://localhost:3001/addproduct/${id}`, {
+    fetch(`http://localhost:3000/addproduct/${id}`, {
       method: "DELETE",
     }).then((result) => {
       result.json().then((resp) => {
@@ -116,7 +116,7 @@ const Products = () => {
   };
 
   const updateProduct = async () => {
-    let url = "http://localhost:3001/addproduct";
+    let url = "http://localhost:3000/addproduct";
     const data = await fetch(url);
     const parsedData = await data.json();
     setProducts(parsedData);
@@ -154,9 +154,10 @@ const Products = () => {
         name="q"
         onChange={handleSearchChange}
       />
+      <div className="table-wrapper">
 
-      <table className="table">
-        <thead>
+      <table className="table product">
+        <thead className="table-head">
           <tr>
             <th scope="col">Id</th>
             <th scope="col">Product Name</th>
@@ -190,6 +191,8 @@ const Products = () => {
           ))}
         </tbody>
       </table>
+      </div>
+
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>

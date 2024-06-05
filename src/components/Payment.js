@@ -12,8 +12,8 @@ const PaymentButton = () => {
     // Construct the payment URL when the component mounts
 
     const merchantId = "21de0f4c91";
-    const merchantSecret = "c656922abaea68c102f68993";
-    const totalAmount = 100;
+    const merchantSecret = "e5a059a3b98d3170595e2641";
+    const totalAmount = 3.32;
     const transactionType = "purchase";
     const displayName = "test";
     const user_id = "atulblockcoders@gmail.com";
@@ -25,29 +25,27 @@ const PaymentButton = () => {
   }, []);
 
   useEffect(() => {
-    const merchantId2 = "22dbe0e01a";
-    const merchantSecret2 = "8faa5d6526b20aaadc79b0e9";
+    const merchantId2 = "21de0f4c91";
+    const merchantSecret2 = "e5a059a3b98d3170595e2641";
     const totalAmount2 = 100;
     const transactionType2 = "purchase";
     const displayName2 = "test";
     const user_id2 = "atulblockcoders@gmail.com";
     const billingInterval = 1; // Assuming you want to set billing interval to 1, change as needed
-    const currency2 = "USD"
+    const currency2 = "INR";
     const url2 = `https://test.payken.io/invoice/merchant_id=${merchantId2}&merchant_secret=${merchantSecret2}?display_name=${displayName2}&total=${totalAmount2}&type=${transactionType2}&interval=${billingInterval}&user_id=${user_id2}&currency_code=${currency2}`;
     setPaymentURL2(url2);
   }, []);
   useEffect(() => {
-
-
     const merchant_id3 = "21de0f4c91";
-    const merchant_secret3 = "c656922abaea68c102f68993";
+    const merchant_secret3 = "e5a059a3b98d3170595e2641";
     const totalAmount3 = 30;
-    const transactionType3 = 'recurring';
+    const transactionType3 = "recurring";
     const billingInterval3 = 7;
     const displayName3 = "test";
     const orderId3 = Math.floor(Math.random() * 1000);
     const userId3 = "atulblockcoders@gmail.com";
-    const URL3 = `https://test.payken.io/invoice/merchant_id=${merchant_id3}&merchant_secret=${merchant_secret3}?display_name=${displayName3}&user_id=${userId3}&total=${totalAmount3}&type=${transactionType3}&interval=${billingInterval3}&order_id=${orderId3}`
+    const URL3 = `https://test.payken.io/invoice/merchant_id=${merchant_id3}&merchant_secret=${merchant_secret3}?display_name=${displayName3}&user_id=${userId3}&total=${totalAmount3}&type=${transactionType3}&interval=${billingInterval3}&order_id=${orderId3}`;
 
     setPaymentURL3(URL3);
   }, []);

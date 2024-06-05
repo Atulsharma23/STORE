@@ -4,7 +4,9 @@
   margin: 40px;
   justify-content: center;
 }
-
+.table-head{
+  background-color: #989999;
+}
 .Update-User {
   display: flex;
   flex-direction: column;

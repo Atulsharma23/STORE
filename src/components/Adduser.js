@@ -17,7 +17,7 @@ const AddUser = () => {
   }, []);
 
   const updateUsers = async () => {
-    const url = "http://localhost:3001/users";
+    const url = "http://localhost:3000/users";
     const data = await fetch(url);
     const parsedData = await data.json();
     setUsers(parsedData);
@@ -52,7 +52,7 @@ const AddUser = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       if (selectUser) {
-        const updateUserUrl = `http://localhost:3001/users/${selectUser.id}`;
+        const updateUserUrl = `http://localhost:3000/users/${selectUser.id}`;
         fetch(updateUserUrl, {
           method: "PUT",
           headers: {
@@ -86,7 +86,7 @@ const AddUser = () => {
   };
 
   const deleteUser = (id) => {
-    fetch(`http://localhost:3001/users/${id}`, {
+    fetch(`http://localhost:3000/users/${id}`, {
       method: "DELETE",
     }).then((result) => {
       result.json().then((resp) => {
@@ -113,7 +113,7 @@ const AddUser = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       let data = { name, email, password };
-      fetch("http://localhost:3001/users", {
+      fetch("http://localhost:3000/users", {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -159,35 +159,39 @@ const AddUser = () => {
         name="q"
         onChange={handleSearchChange}
       />
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Email</th>
-            <th scope="col">Password</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentUsers.map((user) => (
-            <tr key={user.id}>
-              <th scope="row">{user.id}</th>
-              <td>{user.name}</td>
-              <td>{user.email}</td>
-              <td>{user.password}</td>
-              <td>
-                <button className="btn-primary" onClick={() => Edit(user.id)}>
-                  Edit
-                </button>
-                <button className="btn-primary" onClick={() => deleteUser(user.id)}>
-                  Delete
-                </button>
-              </td>
+      <div className="table-wrapper">
+
+        <table className="table addnew">
+          <thead className="table-head">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Password</th>
+              <th scope="col">Action</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentUsers.map((user) => (
+              <tr key={user.id}>
+                <th scope="row">{user.id}</th>
+                <td>{user.name}</td>
+                <td>{user.email}</td>
+                <td>{user.password}</td>
+                <td>
+                  <button className="btn-primary" onClick={() => Edit(user.id)}>
+                    Edit
+                  </button>
+                  <button className="btn-primary" onClick={() => deleteUser(user.id)}>
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
       <nav aria-label="Page navigation example">
         <ul className="pagination">
           <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
