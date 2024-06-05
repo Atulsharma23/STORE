@@ -149,11 +149,13 @@ span {
 }
 
 .heading {
-  margin-left: 38%;
-  margin-top: 12px;
+  display: flex;
   color: #091416;
+  align-items: center;
+  /* margin-left: 17%; */
+  /* margin-top: -58px; */
+  justify-content: center;
 }
-
 
 .input-fields .in {
   margin-bottom: 30px;
