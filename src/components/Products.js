@@ -83,6 +83,7 @@ const Products = () => {
     setErrors(validationErrors);
     if (Object.keys(validationErrors).length === 0) {
       let data = {
+
         name: productName,
         price: productPrice,
         description: description,
@@ -156,41 +157,41 @@ const Products = () => {
       />
       <div className="table-wrapper">
 
-      <table className="table product">
-        <thead className="table-head">
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Price</th>
-            <th scope="col">Description</th>
-            <th scope="col">Delete</th>
-            <th scope="col">Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {currentProducts.map((data) => (
-            <tr key={data.id}>
-              <th scope="row">{data.id}</th>
-              <td>{data.name}</td>
-              <td>${data.price}</td>
-              <td>{data.description}</td>
-              <td>
-                <button
-                  className="btn-primary"
-                  onClick={() => deleteProduct(data.id)}
-                >
-                  Delete
-                </button>
-              </td>
-              <td>
-                <button className="btn-primary" onClick={() => Edit(data.id)}>
-                  Edit
-                </button>
-              </td>
+        <table className="table product">
+          <thead className="table-head">
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Product Name</th>
+              <th scope="col">Price</th>
+              <th scope="col">Description</th>
+              <th scope="col">Delete</th>
+              <th scope="col">Edit</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {currentProducts.map((data) => (
+              <tr key={data.id}>
+                <th scope="row">{data.id}</th>
+                <td>{data.name}</td>
+                <td>${data.price}</td>
+                <td>{data.description}</td>
+                <td>
+                  <button
+                    className="btn-primary"
+                    onClick={() => deleteProduct(data.id)}
+                  >
+                    Delete
+                  </button>
+                </td>
+                <td>
+                  <button className="btn-primary" onClick={() => Edit(data.id)}>
+                    Edit
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
 
       <nav aria-label="Page navigation example">

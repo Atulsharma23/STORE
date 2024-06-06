@@ -142,10 +142,11 @@ span {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  background-color: #e8d3e1;
+  background-color: #c8c8c8;
   margin-top: 20px;
+  width: 100%;
   border-radius: 10px;
-  height: 85vh;
+  height: 51vh;
 }
 
 .heading {
@@ -271,12 +272,17 @@ justify-content: center;
 }
 
 .input-fields input {
-  width: 100%;
+  width: 92%;
   padding: 8px;
   font-size: 16px;
   box-sizing: border-box;
 }
-
+.form-floating {
+  width: 91%;
+  /* display: flex; */
+  left: 5%;
+  /* justify-content: center; */
+}
 .input-fields button {
   width: 100%;
   padding: 10px;

@@ -1,36 +1,44 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 
 const ApiIntegration = () => {
-  const [data, setData] = useState([]);
-
-  const getData = async () => {
-    try {
-      const response = await axios.get('https://jsonplaceholder.typicode.com/photos');
-      setData(response.data);
-      console.log(response.data, "This is response of api");
-    } catch (error) {
-      console.log(error, "Error in getting data");
-    }
-  }
+  const [paymentURL, setPaymentURL] = useState("");
+  const [paymentURL2, setPaymentURL2] = useState("");
 
   useEffect(() => {
-    getData();
-  }, []);
 
+    const url = "http://beta.payken.io/hosted-payment/merchant_id=21de0f4c91&merchant_secret=2a865287964647abc59edaa8";
+    setPaymentURL(url);
+  }, []);
+  useEffect(() => {
+
+    const url2 = "http://beta.payken.io/hosted-payment/merchant_id=22dbe0e01a&merchant_secret=d674e430f6d7afd428731550";
+    setPaymentURL2(url2);
+  }, []);
+  const handleButtonClick = () => {
+    // Redirect to the payment URL when the button is clicked
+    window.location.href = paymentURL;
+  };
+  const handleButtonClick2 = () => {
+    // Redirect to the payment URL when the button is clicked
+    window.location.href = paymentURL2;
+  };
   return (
     <div className='container'>
       <div className="flex-box">
-        <h1>Product Listing</h1>
+        <h1>Hosted Payment Links</h1>
         <div className="product-box">
-          {data && data.length !== 0 && data.map((item, index) => (
-            <div className="image" key={index}>
-              <img src={item.thumbnailUrl} alt={item.title} />
-            </div>
-
-
-
-          ))}
+          <button
+            className="btn btn-primary long"
+            onClick={handleButtonClick}
+          >
+            Payment Link without Fee
+          </button>
+          <button
+            className="btn btn-primary long"
+            onClick={handleButtonClick2}
+          >
+            Payment Link with fee
+          </button>
         </div>
 
       </div>
