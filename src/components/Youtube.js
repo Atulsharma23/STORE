@@ -190,9 +190,9 @@ const Youtube = () => {
           </li>
         </ul>
       </nav>
-      <div className="form-container">
+      <div className="school-form">
         <h1 className="heading">This is Youtube Form</h1>
-        <div className="Youtube-input">
+        <div className="input-fields">
           {" "}
           <input
             type="text"
@@ -205,7 +205,7 @@ const Youtube = () => {
           />
         </div>
         {errors.name && <span>{errors.name}</span>}
-        <div className="Youtube-input">
+        <div className="input-fields">
           {" "}
           <input
             type="text"
@@ -216,7 +216,7 @@ const Youtube = () => {
           />
         </div>
         {errors.email && <span>{errors.email}</span>}
-        <div className="Youtube-input">
+        <div className="input-fields">
           {" "}
           <input
             type="text"
