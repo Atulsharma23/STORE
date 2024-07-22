@@ -6,12 +6,12 @@ const ApiIntegration = () => {
 
   useEffect(() => {
 
-    const url = "http://beta.payken.io/hosted-payment/merchant_id=21de0f4c91&merchant_secret=2a865287964647abc59edaa8";
+    const url = "http://app.payken.io/hosted-payment/merchant_id=21de0f4c91&merchant_secret=2a865287964647abc59edaa8";
     setPaymentURL(url);
   }, []);
   useEffect(() => {
 
-    const url2 = "http://beta.payken.io/hosted-payment/merchant_id=22dbe0e01a&merchant_secret=d674e430f6d7afd428731550";
+    const url2 = "http://beta.payken.io/hosted-payment/merchant_id=21de0f4c91&merchant_secret=51a3bfc57c0fb06b4f014548";
     setPaymentURL2(url2);
   }, []);
   const handleButtonClick = () => {

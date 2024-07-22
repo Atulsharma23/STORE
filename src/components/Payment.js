@@ -11,9 +11,9 @@ const PaymentButton = () => {
   useEffect(() => {
     // Construct the payment URL when the component mounts
 
-    const merchantId = "21de0f4c91";
-    const merchantSecret = "e5a059a3b98d3170595e2641";
-    const totalAmount = 3.32;
+    const merchantId = "21";
+    const merchantSecret = "dc03a87f5b4e9104cc8afc6b";
+    const totalAmount = 64.65;
     const transactionType = "purchase";
     const displayName = "test";
     const user_id = "atulblockcoders@gmail.com";
@@ -25,9 +25,9 @@ const PaymentButton = () => {
   }, []);
 
   useEffect(() => {
-    const merchantId2 = "21de0f4c91";
-    const merchantSecret2 = "e5a059a3b98d3170595e2641";
-    const totalAmount2 = 100;
+    const merchantId2 = "22dbe0e01a";
+    const merchantSecret2 = "acfcf259a91993866fc65144";
+    const totalAmount2 = 14.34242;
     const transactionType2 = "purchase";
     const displayName2 = "test";
     const user_id2 = "atulblockcoders@gmail.com";

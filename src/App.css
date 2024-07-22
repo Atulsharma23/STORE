@@ -1,12 +1,58 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #aab6b9;
+}
+
+form.form {
+  background-color: blanchedalmond;
+  height: 500px;
+  width: 1000px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10%;
+  margin-left: 4%;
+  /* Added this line to remove margin from all sides */
+}
+
+form.form input {
+  margin-top: 10px;
+  width: 500px;
+  margin-left: 25%;
+  background: rgb(150, 229, 168);
+  color: white;
+  border: 0px;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+form.form button {
+  margin-top: 10px;
+  height: 30px;
+  width: 130px;
+  margin-left: 43%;
+  background: cadetblue;
+  color: white;
+  border: 0px;
+  border-radius: 6px;
+}
+
 .Form {
   display: flex;
   padding: 10px;
   margin: 40px;
   justify-content: center;
 }
-.table-head{
+
+.table-head {
   background-color: #989999;
 }
+
 .Update-User {
   display: flex;
   flex-direction: column;
@@ -146,7 +192,7 @@ span {
   margin-top: 20px;
   width: 100%;
   border-radius: 10px;
-  height: 51vh;
+  height: 100vh;
 }
 
 .heading {
@@ -199,11 +245,11 @@ span {
 
 }
 
-.container {
+/* .container {
   width: 100%;
   padding: 20px;
   box-sizing: border-box;
-}
+} */
 
 .flex-box {
   display: flex;
@@ -231,10 +277,12 @@ span {
   max-width: 100%;
   max-height: 100%;
 }
-.image img p{
-display: flex;
-justify-content: center;
+
+.image img p {
+  display: flex;
+  justify-content: center;
 }
+
 @me.add-restaurant {
   display: flex;
   flex-direction: column;
@@ -257,13 +305,15 @@ justify-content: center;
   padding: 10px;
   font-size: 16px;
 }
+
 /* Default Styles */
 .add-restaurant {
   display: flex;
   flex-direction: column;
   padding: 16px;
   width: 100%;
-  max-width: 400px; /* Adjust as necessary */
+  max-width: 400px;
+  /* Adjust as necessary */
   margin: auto;
 }
 
@@ -277,12 +327,14 @@ justify-content: center;
   font-size: 16px;
   box-sizing: border-box;
 }
+
 .form-floating {
   width: 91%;
   /* display: flex; */
   left: 5%;
   /* justify-content: center; */
 }
+
 .input-fields button {
   width: 100%;
   padding: 10px;
@@ -293,7 +345,8 @@ justify-content: center;
 @media (max-width: 768px) {
   .add-restaurant {
     padding: 12px;
-    max-width: 90%; /* Make it slightly smaller to fit better */
+    max-width: 90%;
+    /* Make it slightly smaller to fit better */
   }
 
   .input-fields input {
@@ -309,12 +362,34 @@ justify-content: center;
   .input-fields span {
     font-size: 12px;
   }
+
+  form.form input {
+    width: 80%;
+    /* Adjust width to 80% of the container */
+    margin-left: 10%;
+    /* Center the input fields */
+  }
+
+  form.form button {
+    width: 50%;
+    /* Adjust width to 50% of the container */
+    margin-left: 25%;
+    /* Center the button */
+  }
+
+  .Form {
+    flex-direction: column;
+    /* Stack items vertically */
+    padding: 20px;
+    margin: 20px;
+  }
 }
 
 @media (max-width: 480px) {
   .add-restaurant {
     padding: 8px;
-    max-width: 95%; /* Further reduce width for smaller screens */
+    max-width: 95%;
+    /* Further reduce width for smaller screens */
   }
 
   .input-fields input {
@@ -330,7 +405,27 @@ justify-content: center;
   .input-fields span {
     font-size: 10px;
   }
+
+  form.form input {
+    width: 90%;
+    /* Adjust width to 90% of the container */
+    margin-left: 5%;
+    /* Center the input fields */
+  }
+
+  form.form button {
+    width: 70%;
+    /* Adjust width to 70% of the container */
+    margin-left: 15%;
+    /* Center the button */
+  }
+
+  .Form {
+    flex-direction: column;
+    /* Stack items vertically */
+    padding: 10px;
+    margin: 10px;
+  }
 }
 
 /* Centering the form */
-

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Navbar = () => {
+const Navbar = ( {handleLogout}) => {
+  
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -87,13 +88,20 @@ const Navbar = () => {
               >
                 Payment Listing
               </Link>
-             
+
               <Link
                 className="nav-link active"
                 aria-current="page"
                 to="/school"
               >
                 School Form              </Link>
+            </ul>
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <button className="btn btn-danger"  onClick={handleLogout} >
+                  Logout
+                </button>
+              </li>
             </ul>
           </div>
         </div>
