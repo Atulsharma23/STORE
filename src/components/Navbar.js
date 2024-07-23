@@ -1,12 +1,20 @@
 import React from "react";
-import { Link } from "react-router-dom";
-const Navbar = ( {handleLogout}) => {
-  
+import { Link, useNavigate } from "react-router-dom";
+const Navbar = ({ setUserIsRegistered }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+
+    setUserIsRegistered(false);
+    navigate("/"); // Redirect to the "/" route
+
+  };
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
-          <Link className="navbar-brand" to="#">
+          <Link className="navbar-brand" to="/">
             STORE
           </Link>
           <button
@@ -98,7 +106,7 @@ const Navbar = ( {handleLogout}) => {
             </ul>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <button className="btn btn-danger"  onClick={handleLogout} >
+                <button className="btn btn-danger" onClick={handleLogout} >
                   Logout
                 </button>
               </li>

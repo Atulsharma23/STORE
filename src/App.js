@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ApiIntegration from "./components/Home";
@@ -13,25 +14,27 @@ import Payment from "./components/Payment";
 import School from "./components/School";
 import History from "./components/History";
 import Login from "./components/Login";
+import Signup from "./components/Signup";
 import "./App.css";
 import "./responsive.css";
 
 function App() {
+
   const [userIsRegistered, setUserIsRegistered] = useState(false);
-  const handleLogout = () => {
-    setUserIsRegistered(false);
-    // Add any additional logout logic here, such as clearing tokens or user data
-  };
+
+
+
   return (
     <div className="App">
       <Router>
-        {userIsRegistered && <Navbar handleLogout={handleLogout} />}
+
+        {userIsRegistered && <Navbar setUserIsRegistered={setUserIsRegistered} />}
         <Routes>
           {!userIsRegistered ? (
-            <Route
-              path="/"
-              element={<Login setUserIsRegistered={setUserIsRegistered} />}
-            />
+            <>
+              <Route path="/" element={<Login setUserIsRegistered={setUserIsRegistered} />} />
+              <Route path="/signup" element={<Signup setUserIsRegistered={setUserIsRegistered} />} />
+            </>
           ) : (
             <>
               <Route path="/Newuser" element={<Newuser />} />

@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
 const Login = ({ setUserIsRegistered }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSigningUp, setIsSigningUp] = useState(false);
-
+  const [showPass, setShowPass] = useState(false);
+  function showPassfn(e) {
+    e.preventDefault();
+    console.log("show password");
+    setShowPass(!showPass);
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setEmail("")
@@ -80,6 +86,74 @@ const Login = ({ setUserIsRegistered }) => {
 
   return (
     <div className="container">
+
+      <div className="Loginpage">
+        <div className="container1">
+          <div className="left-section">
+            <img src="images/payken 1.png" alt="Payken Logo" />
+            <div className="left-des">
+              <h2>Don't swap just Payken</h2>
+              <h4>Welcome to Payken</h4>
+            </div>
+          </div>
+          <div className="right-section">
+            <form className="advance-div" onSubmit={handleSubmit}>
+              <h3>Sign In</h3>
+
+              <div className="divisonof">
+                <label htmlFor="Email"></label>
+                <img src="images/Email.png" alt="Email Icon" />
+                <input
+                  type="text"
+                  id="Email"
+                  name="Email"
+                  placeholder="Email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+
+              <br />
+              <div className="divisonof">
+                <label htmlFor="Password"></label>
+                <img src="images/Password.png" alt="Password Icon" />
+                <input
+                  type={showPass ? "text" : "password"}
+                  id="Password"
+                  name="Password"
+                  placeholder="Password"
+
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+                <img
+                  className="eye-image"
+                  src="images/Eye.png"
+                  alt="Show Password"
+                  onClick={showPassfn}
+                />
+              </div>
+              <div className="Forgot-link">
+                <Link href="">Forgot Password?</Link>
+              </div>
+              <button type="submit" className="log">
+                Log in
+              </button>
+              <div className="Newtopaypal">
+                <h6>Need Help?</h6> <Link to="/Signup">Create account</Link>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      {/* 
       <form className="form" onSubmit={handleSubmit}>
         <input
           type="email"
@@ -110,7 +184,7 @@ const Login = ({ setUserIsRegistered }) => {
         {isSigningUp && (
           <button type="button" onClick={() => setIsSigningUp(false)}>Already a user?</button>
         )}
-      </form>
+      </form> */}
     </div>
   );
 };

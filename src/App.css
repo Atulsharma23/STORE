@@ -1,10 +1,5 @@
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #aab6b9;
+body{
+  background-color: #daeae9;
 }
 
 form.form {
@@ -429,3 +424,177 @@ span {
 }
 
 /* Centering the form */
+/* Login page */
+.Loginpage {
+  /* background-color: #000000; */
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container1 {
+  width: 900px;
+  height: 565.715px;
+  background-color: #0e0e0e;
+  box-shadow: -1px -2px 25px 0px #01571a;
+  display: flex;
+  justify-content: center;
+  color: #cbf1ff;
+}
+.left-section {
+  width: 50%;
+}
+
+.left-section img {
+  width: 183px;
+  height: 132px;
+  margin-top: 178px;
+  margin-left: 147px;
+}
+.left-des {
+  margin-top: 16px;
+  margin-left: 88px;
+  color: #fff;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.left-des h4 {
+  font-size: 19px;
+  margin-left: 46px;
+}
+.left-des h2 {
+  color: #fff;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.right-section h3 {
+  color: #fff;
+  font-family: Inter;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.right-section {
+  width: 50%;
+
+}
+
+.right-section h3 {
+  margin-bottom: 25px;
+  margin-top: 92px;
+}
+
+.right-section input{
+  border: none;
+  background: transparent !important;
+  color: white;
+
+}
+.divoisionkabaap {
+  margin-left: 55px;
+}
+
+.divisonof {
+  border-bottom: 1px solid white;
+  width: 257px;
+  padding: 5px;
+  margin: 5px;
+}
+
+
+.log{
+  margin-left: 18px;
+}
+.Newtopaypal {
+  display: flex;
+  margin-left: 57px;
+  margin-top: 10px;
+}
+.eye-image{
+ 
+  float: right;
+  margin-top: 9px;
+}
+ .right-section input{
+  outline: none;
+  box-shadow: none;
+ }
+
+ .icon{
+  color: #FFF;
+ }
+.divisonof img{
+  cursor: pointer;
+}
+/* Login page css ends here */
+/* sign in css  starts here*/
+.advance-div {
+  /* display: flex; */
+  /* justify-content: center; */
+  margin-top: 126px;
+  margin-left: 66px;
+}
+.Forgot-link {
+  float: right;
+  margin-right: 111px;
+}
+/* sign in csss ends here */
+
+
+.log {
+  margin-left: 18px;
+}
+.log {
+  width: 250px;
+  height: 39px;
+  flex-shrink: 0;
+  background-color: #01571A;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+/* email verify */
+
+
+.dadofdad {
+  margin-top: 123px;
+}
+/* email verify css ends here */
+@keyframes kfr-filled {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes kfr-celebrate {
+  0% {
+    transform: scale(0);
+  }
+
+  50% {
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+    display: none;
+  }
+}
