@@ -33,6 +33,7 @@ function App() {
           {!userIsRegistered ? (
             <>
               <Route path="/" element={<Login setUserIsRegistered={setUserIsRegistered} />} />
+
               <Route path="/signup" element={<Signup setUserIsRegistered={setUserIsRegistered} />} />
             </>
           ) : (

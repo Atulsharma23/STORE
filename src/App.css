@@ -172,11 +172,22 @@ span {
   border: 1px solid white;
 
 }
-
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* height: 10vh; Optional: Adjust as needed */
+}
 .btn-container {
   display: flex;
   justify-content: center;
   margin: 100px;
+}
+.btn-primary1{
+  width: 200px;
+  color: white;
+  background-color: blue;
+  border-radius: 5px;
 }
 
 .school-form {

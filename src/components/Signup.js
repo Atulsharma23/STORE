@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signup = ({ setUserIsRegistered }) => {
     const [showPass, setShowPass] = useState(false);
@@ -10,6 +12,8 @@ const Signup = ({ setUserIsRegistered }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+
+    const notify = () => toast.success("You are successfully registered!");
 
     const navigate = useNavigate();
 
@@ -27,6 +31,8 @@ const Signup = ({ setUserIsRegistered }) => {
                 if (response.status === 201) {
                     // Handle successful registration
                     setUserIsRegistered(true);
+                    notify();
+                    navigate("/"); // Redirect to the "/" route
                 } else {
                     // Handle registration failure
                     alert("Registration failed. Please try again.");
@@ -49,8 +55,6 @@ const Signup = ({ setUserIsRegistered }) => {
         setEmail("");
         setPassword("");
         setConfirmPassword("");
-        navigate("/"); // Redirect to the "/" route
-
     };
 
     return (

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Link } from 'react-router-dom';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Login = ({ setUserIsRegistered }) => {
   const [email, setEmail] = useState("");
@@ -8,16 +9,20 @@ const Login = ({ setUserIsRegistered }) => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isSigningUp, setIsSigningUp] = useState(false);
   const [showPass, setShowPass] = useState(false);
-  function showPassfn(e) {
+
+  const showPassfn = (e) => {
     e.preventDefault();
     console.log("show password");
     setShowPass(!showPass);
-  }
+  };
+
+  const notify = () => toast.success("You are successfully Logging in!");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setEmail("")
-    setPassword("")
-    setConfirmPassword("")
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
     if (isSigningUp) {
       // Perform registration
       if (password === confirmPassword && email && password) {
@@ -29,7 +34,10 @@ const Login = ({ setUserIsRegistered }) => {
 
           if (response.status === 201) {
             // Handle successful registration
-            setUserIsRegistered(true);
+            notify();
+            setTimeout(() => {
+              setUserIsRegistered(true);
+            }, 7000); // 1-second delay
           } else {
             // Handle registration failure
             alert("Registration failed. Please try again.");
@@ -56,7 +64,10 @@ const Login = ({ setUserIsRegistered }) => {
             // User exists, proceed with login
             const user = response.data[0];
             if (user.password === password) {
-              setUserIsRegistered(true);
+              notify("Login successful!");
+              setTimeout(() => {
+                setUserIsRegistered(true);
+              }, 2000); // 2-second delay
             } else {
               alert("Login failed. Please check your credentials.");
             }
@@ -86,8 +97,10 @@ const Login = ({ setUserIsRegistered }) => {
 
   return (
     <div className="container">
+      <Toaster position="top-right" reverseOrder={false} />
 
       <div className="Loginpage">
+
         <div className="container1">
           <div className="left-section">
             <img src="images/payken 1.png" alt="Payken Logo" />
@@ -99,7 +112,6 @@ const Login = ({ setUserIsRegistered }) => {
           <div className="right-section">
             <form className="advance-div" onSubmit={handleSubmit}>
               <h3>Sign In</h3>
-
               <div className="divisonof">
                 <label htmlFor="Email"></label>
                 <img src="images/Email.png" alt="Email Icon" />
@@ -113,7 +125,6 @@ const Login = ({ setUserIsRegistered }) => {
                   onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
-
               <br />
               <div className="divisonof">
                 <label htmlFor="Password"></label>
@@ -123,7 +134,6 @@ const Login = ({ setUserIsRegistered }) => {
                   id="Password"
                   name="Password"
                   placeholder="Password"
-
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
@@ -136,7 +146,7 @@ const Login = ({ setUserIsRegistered }) => {
                 />
               </div>
               <div className="Forgot-link">
-                <Link href="">Forgot Password?</Link>
+                <Link to="">Forgot Password?</Link>
               </div>
               <button type="submit" className="log">
                 Log in
@@ -148,43 +158,6 @@ const Login = ({ setUserIsRegistered }) => {
           </div>
         </div>
       </div>
-
-
-
-
-
-      {/* 
-      <form className="form" onSubmit={handleSubmit}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        {isSigningUp && (
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
-        )}
-        <button type="submit">
-          {isSigningUp ? "Register" : "Login"}
-        </button>
-        {!isSigningUp && (
-          <button type="button" onClick={() => setIsSigningUp(true)}>Sign Up</button>
-        )}
-        {isSigningUp && (
-          <button type="button" onClick={() => setIsSigningUp(false)}>Already a user?</button>
-        )}
-      </form> */}
     </div>
   );
 };

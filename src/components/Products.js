@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -11,7 +12,9 @@ const Products = () => {
   const [errors, setErrors] = useState({});
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
-
+  const notify = () => toast.success("Restaurant Saved successfully!");
+  const notifyq = () => toast.success("Restaurant Deleted successfully!");
+  const notifyw = () => toast.success("Restaurant Updated successfully!");
   const Edit = (id) => {
     const selectUser = products.find((data) => data.id === id);
     if (selectUser) {
@@ -57,6 +60,7 @@ const Products = () => {
             updateProduct();
             setIsEditMode(false);
             SetSelectUser(0);
+            notifyw("edited")
           });
         });
       } else {
@@ -101,6 +105,7 @@ const Products = () => {
           setProductPrice("");
           setDescription("");
           updateProduct();
+          notify("Added")
         });
       });
     }
@@ -112,6 +117,7 @@ const Products = () => {
     }).then((result) => {
       result.json().then((resp) => {
         updateProduct();
+        notifyq("deleted")
       });
     });
   };
@@ -146,6 +152,8 @@ const Products = () => {
 
   return (
     <div className="container">
+          <Toaster position="top-right" reverseOrder={false} />
+
       <label htmlFor="site-search">
         <h3>Search Product</h3>
       </label>

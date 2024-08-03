@@ -240,12 +240,15 @@ const Youtube = () => {
         </div>
 
         <br />
-        <button
-          className="btn-primary "
-          onClick={editMode ? UpdateUser : SaveUser}
-        >
-          {editMode ? "Update.." : "Save User"}
-        </button>
+        <div class="button-container">
+
+          <button
+            className="btn-primary1"
+            onClick={editMode ? UpdateUser : SaveUser}
+          >
+            {editMode ? "Update.." : "Save User"}
+          </button>
+        </div>
       </div>
 
     </div>

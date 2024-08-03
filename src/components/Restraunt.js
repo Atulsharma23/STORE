@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const Restraunt = () => {
   const [restau, setRestau] = useState([]);
@@ -15,7 +16,9 @@ const Restraunt = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const itemsPerPage = 5;
-
+  const notify = () => toast.success("Restaurant Saved successfully!");
+  const notifyq = () => toast.success("Restaurant Deleted successfully!");
+  const notifyw = () => toast.success("Restaurant Updated successfully!");
   const Edit = (id) => {
     const selectedUser = restau.find((restaurant) => restaurant.id === id);
     if (selectedUser) {
@@ -67,6 +70,7 @@ const Restraunt = () => {
             updateRestraunt();
             setIsEditMode(false);
             setSelectUser(0);
+
           });
       } else {
         setName("");
@@ -76,6 +80,7 @@ const Restraunt = () => {
         updateRestraunt();
         setIsEditMode(false);
         setSelectUser(0);
+        notifyw("updated")
       }
     }
   };
@@ -114,6 +119,7 @@ const Restraunt = () => {
           setRating("");
           setEmail("");
           updateRestraunt();
+          notify("saved")
         });
       });
     }
@@ -125,6 +131,7 @@ const Restraunt = () => {
     }).then((result) => {
       result.json().then((resp) => {
         updateRestraunt();
+        notifyq("deleted")
       });
     });
   };
@@ -158,6 +165,8 @@ const Restraunt = () => {
 
   return (
     <div className="container">
+      <Toaster position="top-right" reverseOrder={false} />
+
       <div className="Restraunt-List">
         <h2>Restraunt List</h2>
         <h6>Search Restraunt</h6>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import toast, { Toaster } from 'react-hot-toast';
 
 const AddUser = () => {
   const [name, setName] = useState("");
@@ -11,6 +12,10 @@ const AddUser = () => {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
+  const notify = () => toast.success("User Saved successfully!");
+  const notifyq = () => toast.success("User Deleted successfully!");
+  const notifyw = () => toast.success("User Updated successfully!");
+
 
   useEffect(() => {
     updateUsers();
@@ -70,6 +75,7 @@ const AddUser = () => {
             updateUsers();
             setIsEditMode(false);
             SetSelectUser(0); // Assuming you want to update the user list after the update
+            notifyw("updated")
           })
           .catch((error) => {
             console.error("Error updating user:", error);
@@ -91,6 +97,7 @@ const AddUser = () => {
     }).then((result) => {
       result.json().then((resp) => {
         updateUsers();
+        notifyq("Deleted");
       });
     });
   };
@@ -102,9 +109,10 @@ const AddUser = () => {
     }
     if (!email.trim()) {
       validationErrors.email = "Email is Required";
-    } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
-      validationErrors.email = "Email is not Valid";
     }
+    // } else if (!/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/.test(email)) {
+    //   validationErrors.email = "Email is not Valid";
+    // }
     if (!password.trim()) {
       validationErrors.password = "Password is required";
     } else if (password.length < 6) {
@@ -127,6 +135,8 @@ const AddUser = () => {
           setEmail("");
           setPassword("");
           updateUsers();
+          notify("Login successful!");
+
         });
     }
   };
@@ -136,10 +146,10 @@ const AddUser = () => {
     setCurrentPage(1); // Reset to the first page on new search
   };
 
+
+  const searchTerm = (search || "").toLowerCase();
   const filteredUsers = users.filter((data) =>
-    search.toLowerCase() === ""
-      ? data
-      : data.name.toLowerCase().includes(search.toLowerCase())
+    searchTerm === "" || (data.name && data.name.toLowerCase().includes(searchTerm))
   );
 
   const totalPages = Math.ceil(filteredUsers.length / itemsPerPage);
@@ -150,6 +160,8 @@ const AddUser = () => {
 
   return (
     <div className="container">
+      <Toaster position="top-right" reverseOrder={false} />
+
       <h2>User List</h2>
       <h6>Search User</h6>
       <input
