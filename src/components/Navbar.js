@@ -6,6 +6,10 @@ const Navbar = ({ setUserIsRegistered }) => {
   const handleLogout = () => {
 
     setUserIsRegistered(false);
+    localStorage.removeItem("userIsRegistered");
+
+    sessionStorage.setItem("auth", "false");
+    sessionStorage.setItem("email", null);
     navigate("/"); // Redirect to the "/" route
 
   };

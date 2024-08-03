@@ -35,8 +35,13 @@ const Login = ({ setUserIsRegistered }) => {
           if (response.status === 201) {
             // Handle successful registration
             notify();
+            localStorage.setItem("userIsRegistered", "true");
+            sessionStorage.setItem("auth", "true");
+            sessionStorage.setItem("email", email);
             setTimeout(() => {
               setUserIsRegistered(true);
+
+
             }, 7000); // 1-second delay
           } else {
             // Handle registration failure
@@ -65,6 +70,9 @@ const Login = ({ setUserIsRegistered }) => {
             const user = response.data[0];
             if (user.password === password) {
               notify("Login successful!");
+              localStorage.setItem("userIsRegistered", "true");
+              sessionStorage.setItem("auth", "true");
+              sessionStorage.setItem("email", email);
               setTimeout(() => {
                 setUserIsRegistered(true);
               }, 2000); // 2-second delay

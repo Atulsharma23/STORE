@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+// App.js
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import ApiIntegration from "./components/Home";
@@ -19,21 +19,22 @@ import "./App.css";
 import "./responsive.css";
 
 function App() {
-
   const [userIsRegistered, setUserIsRegistered] = useState(false);
 
-
+  useEffect(() => {
+    // Check local storage on app load
+    const isRegistered = localStorage.getItem("userIsRegistered") === "true";
+    setUserIsRegistered(isRegistered);
+  }, []);
 
   return (
     <div className="App">
       <Router>
-
         {userIsRegistered && <Navbar setUserIsRegistered={setUserIsRegistered} />}
         <Routes>
           {!userIsRegistered ? (
             <>
               <Route path="/" element={<Login setUserIsRegistered={setUserIsRegistered} />} />
-
               <Route path="/signup" element={<Signup setUserIsRegistered={setUserIsRegistered} />} />
             </>
           ) : (
