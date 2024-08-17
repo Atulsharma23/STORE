@@ -1,4 +1,4 @@
-body{
+body {
   background-color: #daeae9;
 }
 
@@ -172,18 +172,21 @@ span {
   border: 1px solid white;
 
 }
+
 .button-container {
   display: flex;
   justify-content: center;
   align-items: center;
   /* height: 10vh; Optional: Adjust as needed */
 }
+
 .btn-container {
   display: flex;
   justify-content: center;
   margin: 100px;
 }
-.btn-primary1{
+
+.btn-primary1 {
   width: 200px;
   color: white;
   background-color: blue;
@@ -392,6 +395,11 @@ span {
 }
 
 @media (max-width: 480px) {
+  .left-section {
+    display: none;
+  }
+
+
   .add-restaurant {
     padding: 8px;
     max-width: 95%;
@@ -444,6 +452,7 @@ span {
   justify-content: center;
   align-items: center;
 }
+
 .container1 {
   width: 900px;
   height: 565.715px;
@@ -453,6 +462,7 @@ span {
   justify-content: center;
   color: #cbf1ff;
 }
+
 .left-section {
   width: 50%;
 }
@@ -463,6 +473,7 @@ span {
   margin-top: 178px;
   margin-left: 147px;
 }
+
 .left-des {
   margin-top: 16px;
   margin-left: 88px;
@@ -473,10 +484,12 @@ span {
   font-weight: 600;
   line-height: normal;
 }
+
 .left-des h4 {
   font-size: 19px;
   margin-left: 46px;
 }
+
 .left-des h2 {
   color: #fff;
   font-family: Inter;
@@ -485,6 +498,7 @@ span {
   font-weight: 600;
   line-height: normal;
 }
+
 .right-section h3 {
   color: #fff;
   font-family: Inter;
@@ -493,6 +507,7 @@ span {
   font-weight: 600;
   line-height: normal;
 }
+
 .right-section {
   width: 50%;
 
@@ -503,12 +518,13 @@ span {
   margin-top: 92px;
 }
 
-.right-section input{
+.right-section input {
   border: none;
   background: transparent !important;
   color: white;
 
 }
+
 .divoisionkabaap {
   margin-left: 55px;
 }
@@ -521,30 +537,35 @@ span {
 }
 
 
-.log{
+.log {
   margin-left: 18px;
 }
+
 .Newtopaypal {
   display: flex;
   margin-left: 57px;
   margin-top: 10px;
 }
-.eye-image{
- 
+
+.eye-image {
+
   float: right;
   margin-top: 9px;
 }
- .right-section input{
+
+.right-section input {
   outline: none;
   box-shadow: none;
- }
+}
 
- .icon{
+.icon {
   color: #FFF;
- }
-.divisonof img{
+}
+
+.divisonof img {
   cursor: pointer;
 }
+
 /* Login page css ends here */
 /* sign in css  starts here*/
 .advance-div {
@@ -553,16 +574,19 @@ span {
   margin-top: 126px;
   margin-left: 66px;
 }
+
 .Forgot-link {
   float: right;
   margin-right: 111px;
 }
+
 /* sign in csss ends here */
 
 
 .log {
   margin-left: 18px;
 }
+
 .log {
   width: 250px;
   height: 39px;
@@ -575,6 +599,7 @@ span {
   font-weight: 600;
   line-height: normal;
 }
+
 /* email verify */
 .loader-container {
   position: fixed;
@@ -591,6 +616,7 @@ span {
 .dadofdad {
   margin-top: 123px;
 }
+
 .custom-dropdown {
   width: 200px;
   position: relative;
@@ -638,9 +664,11 @@ span {
 .dropdown-item:hover {
   background-color: #f0f0f0;
 }
+
 .mt-5 {
   margin-top: 0rem !important;
 }
+
 /* email verify css ends here */
 @keyframes kfr-filled {
   0% {
