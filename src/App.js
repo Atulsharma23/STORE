@@ -15,6 +15,7 @@ import School from "./components/School";
 import History from "./components/History";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
+import Gender from "./components/Gender";
 import "./App.css";
 import "./responsive.css";
 
@@ -51,6 +52,8 @@ function App() {
               <Route path="/Payment" element={<Payment />} />
               <Route path="/School" element={<School />} />
               <Route path="/History" element={<History />} />
+              <Route path="/Gender" element={<Gender />} />
+
             </>
           )}
         </Routes>

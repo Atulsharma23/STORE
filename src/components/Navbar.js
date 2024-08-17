@@ -108,6 +108,12 @@ const Navbar = ({ setUserIsRegistered }) => {
                 to="/school"
               >
                 School Form              </Link>
+                <Link
+                className="nav-link active"
+                aria-current="page"
+                to="/Gender"
+              >
+                Gender list             </Link>
             </ul>
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <li className="nav-item">
