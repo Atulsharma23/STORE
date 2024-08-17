@@ -399,7 +399,36 @@ span {
     display: none;
   }
 
+  .right-section {
+    margin-left: -50px;
+    width: 100% !important;
+  }
 
+  .Loginpage {
+    width: 100%;
+    height: 58vh !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .divisonof img {
+    cursor: pointer;
+    margin-right: 11px;
+}
+.right-section h3 {
+  margin-bottom: 20px;
+  margin-top: 70px;
+  margin-left: 47px;
+}
+.divoisionkabaap {
+  margin-left: 23px !important;
+}
+.advance-div {
+  /* display: flex; */
+  /* justify-content: center; */
+  margin-top: 101px;
+  margin-left: 24px;
+}
   .add-restaurant {
     padding: 8px;
     max-width: 95%;
