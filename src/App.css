@@ -400,9 +400,9 @@ span {
   }
 
   .right-section {
-    margin-left: -50px;
+    margin-left: -100px;
     width: 100% !important;
-  }
+}
 
   .Loginpage {
     width: 100%;
@@ -421,8 +421,7 @@ span {
   margin-left: 47px;
 }
 .divoisionkabaap {
-  margin-left: 23px !important;
-}
+  margin-left: 38px !important;}
 .advance-div {
   /* display: flex; */
   /* justify-content: center; */
